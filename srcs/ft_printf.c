@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/06/30 18:38:54 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/01 15:06:20 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int	ft_printf(const char *str, ...)
 		ft_putchar_fd(*str++, 1);
 		chars++;
 	}
+	va_end(args);
 	return (chars);
 }
