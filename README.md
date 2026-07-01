@@ -79,6 +79,7 @@ make
 ## Resources
 
 * Peers
+* `man`
 
 ### AI Usage
 

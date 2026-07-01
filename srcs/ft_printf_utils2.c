@@ -6,13 +6,20 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 18:18:49 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/06/30 18:44:32 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/01 20:57:17 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <ft_printf_utils.h>
 
+/** @brief print unsigned number onto screen
+ *
+ * handles: `%u`
+ *
+ * @internal
+ * @param nbr number to print
+ * @return number of characters printed
+ */
 int	ft_putunsigned(unsigned int nbr)
 {
 	char	c;
@@ -26,6 +33,15 @@ int	ft_putunsigned(unsigned int nbr)
 	return (ret + 1);
 }
 
+/** @brief print hexadecimal number onto screen
+ *
+ * handles: `%x`, `%X`
+ *
+ * @internal
+ * @param nbr		number to print
+ * @param uppercase	whether to print it in uppercase
+ * @return number of characters printed
+ */
 int	ft_puthex(unsigned int nbr, int uppercase)
 {
 	int		res;

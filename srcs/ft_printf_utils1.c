@@ -6,25 +6,46 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 18:11:31 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/06/30 18:44:02 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/01 20:57:29 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <ft_printf_utils.h>
 
+/** @brief print character onto screen
+ *
+ * handles: `%c`
+ *
+ * @internal
+ * @param c character to print
+ * @return number of characters printed
+ */
 int	ft_putchar(char c)
 {
 	ft_putchar_fd(c, 1);
 	return (1);
 }
 
+/** @brief print string onto screen
+ *
+ * handles: `%s`
+ *
+ * @internal
+ * @param str string to print
+ * @return number of characters printed
+ */
 int	ft_putstr(char *str)
 {
 	ft_putstr_fd(str, 1);
 	return (ft_strlen(str));
 }
 
+/** @brief print adress onto screen
+ *
+ * @internal helper for ft_putptr()
+ * @param ptr adress to print
+ * @return number of characters printed
+ */
 static int	ft_putaddress(size_t ptr)
 {
 	int		res;
@@ -43,6 +64,14 @@ static int	ft_putaddress(size_t ptr)
 	return (ret + 1);
 }
 
+/** @brief print pointer's address onto screen
+ *
+ * handles: `%p`
+ *
+ * @internal
+ * @param ptr pointer which address to print
+ * @return number of characters printed
+ */
 int	ft_putptr(void *ptr)
 {
 	if (!ptr)
@@ -54,6 +83,14 @@ int	ft_putptr(void *ptr)
 	return (ft_putaddress((size_t)ptr) + 2);
 }
 
+/** @brief print number onto screen
+ *
+ * handles: `%d`, `%i`
+ *
+ * @internal
+ * @param nbr number to print
+ * @return number of characters printed
+ */
 int	ft_putnbr(int nbr)
 {
 	char	c;

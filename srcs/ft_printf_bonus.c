@@ -6,16 +6,23 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/01 18:55:27 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/01 20:58:26 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ft_printf.h>
 #include <ft_printf_utils_bonus.h>
 
 #include <stdarg.h>
 #include <stdlib.h>
 
-int	ft_printf_dig(const char **str)
+/** @brief get the width for a formatter
+ *
+ * @internal handles width reading ft_printf_format()
+ * @param str pointer to current position in format string
+ * @return parsed value
+ */
+static int	ft_printf_width(const char **str)
 {
 	int	res;
 
@@ -28,7 +35,22 @@ int	ft_printf_dig(const char **str)
 	return (res);
 }
 
-void	ft_putfmt(const char **fmt, va_list args, t_list **lst,
+/** @brief print data subsituting the formatter
+ *
+ * @see ft_printf_format()
+ * @see ft_printf_c()
+ * @see ft_printf_s()
+ * @see ft_printf_p()
+ * @see ft_printf_di()
+ * @see ft_printf_u()
+ * @see ft_printf_x()
+ *
+ * @internal
+ * @param fmt	pointer to current position in format string
+ * @param args	variadic arguments list
+ * @param lst	pointer to linked list
+*/
+static void	ft_putfmt(const char **fmt, va_list args, t_list **lst,
 	t_printf_flags flags)
 {
 	if (**fmt == 'c')
@@ -48,7 +70,7 @@ void	ft_putfmt(const char **fmt, va_list args, t_list **lst,
 	(*fmt)++;
 }
 
-void	ft_printf_format(const char **fmt, va_list args, t_list **lst)
+static void	ft_printf_format(const char **fmt, va_list args, t_list **lst)
 {
 	t_printf_flags	flags;
 
@@ -62,7 +84,7 @@ void	ft_printf_format(const char **fmt, va_list args, t_list **lst)
 		else if (**fmt == '.')
 		{
 			(*fmt)++;
-			flags.precision = ft_printf_dig(fmt);
+			flags.precision = ft_printf_width(fmt);
 		}
 		else if (**fmt == '#')
 			flags.alternate = 1;
@@ -71,13 +93,13 @@ void	ft_printf_format(const char **fmt, va_list args, t_list **lst)
 		else if (**fmt == '+')
 			flags.sign = 1;
 		else if (ft_isdigit(**fmt))
-			flags.min_width = ft_printf_dig(fmt);
+			flags.min_width = ft_printf_width(fmt);
 		else
 			return (ft_putfmt(fmt, args, lst, flags));
 	}
 }
 
-int	ft_lst_print(t_list *lst)
+static int	ft_lst_print(t_list *lst)
 {
 	t_list	*next;
 	int		size;

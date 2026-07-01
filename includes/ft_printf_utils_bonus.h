@@ -6,14 +6,14 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 21:09:42 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/01 18:09:27 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/01 20:57:52 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_UTILS_BONUS_H
 # define FT_PRINTF_UTILS_BONUS_H
 
-# include <libft.h>
+# include <ft_printf.h>
 # include <ft_printf_flags_bonus.h>
 
 void	ft_printf_c(char c, t_list **lst, t_printf_flags flags);

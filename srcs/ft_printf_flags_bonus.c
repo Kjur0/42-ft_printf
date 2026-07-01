@@ -6,13 +6,17 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 20:48:14 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/01 18:49:58 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/01 21:00:25 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <ft_printf_flags_bonus.h>
 
+/** @brief create new ::t_printf_flags with default values
+ *
+ * @internal
+ * @return default ::t_printf_flags
+*/
 t_printf_flags	new_printf_flags(void)
 {
 	t_printf_flags	flags;
@@ -25,10 +29,4 @@ t_printf_flags	new_printf_flags(void)
 	flags.sign = 0;
 	flags.space = 0;
 	return (flags);
-}
-
-int	any_printf_flags(const t_printf_flags flags)
-{
-	return (flags.align_left || flags.alternate || flags.min_width
-		|| flags.pad_zero || flags.sign || flags.space);
 }
