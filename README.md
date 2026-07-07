@@ -6,7 +6,7 @@
 
 > [!IMPORTANT]
 > `ft_printf` requires presence of `libft` library.  
-> By default it is directly embedded into the `libftprintf` library 
+> `ft_printf` is embedded directly into `libft` library.
 
 ## Description
 
