@@ -107,3 +107,40 @@ It stores the number of characters in a variable and prints everything as it is 
 
 Printing numbers is done recursively, and the number of printed characters are passed back as return values to the main function.
 Printing strings is done by counting its length and printing it character by character.
+
+### Bonus
+
+#### Structures
+
+A structure `s_printf_flags` is used to store formatter flags and their values.
+
+A linked list is used to store all character to be printed. It utilizes special `s_char` as a basic container (it also ensures safety from segmentation faults).  
+Usage of linked list allows to store all characters in the order they are encountered, and print them all at once at the end of the function. This is done to ensure that the output is printed in the correct order, and to avoid issues with padding and alignment.
+
+#### Algorithms
+
+Parsing the format string is done by iterating through each character:
+* If it is a normal character, it is added to the linked list.
+* If it is a start of a format specifier (`%`) a function is called to parse the specifier and its flags, and the appropriate function is called to handle the argument and print it.
+
+Parsing flags is done by iterating through each character after the `%` until a valid specifier is found. Each flag is checked and stored in the `s_printf_flags` structure.
+
+After specifier is found, the appropriate function is called to handle the argument and print it. The function uses the flags stored in the `s_printf_flags` structure to format the output.
+
+Additionally parsing the flag works on the original `format` pointer, therefore there is no need to additionally update the pointer to the next character after the specifier, as it is already updated in the original pointer.
+
+Printing each argument is done by calling the appropriate function for the specifier, which uses the flags stored in the `s_printf_flags` structure to format the output. The output is then added to the linked list.  
+All handlers first ensure proper padding/alignment/precision, then add the characters to the linked list.  
+Handlers for numbers use recursive helper functions to print the digits in the correct order, and handlers for strings use a loop to print each character.
+
+Some handlers also use helpers that determine the length of the argument to be printed (for handling precision, alignment, and padding).  
+These are either implemented as separate helper functions or use existing functions from the `libft` library.
+
+Determining the length of any number is done by dividing the number by base until it reaches 0, and counting the number of divisions.  
+Some helpers also ensure proper handling of negative numbers, and return the length of the number with the sign.
+
+After the entire `format` string is parsed, the linked list is traversed:
+* Each character is printed to the standard output.
+* Each `char` container is freed after it is printed to avoid memory leaks. (`s_char`)
+* Each node of the linked list is freed after it is printed to avoid memory leaks.
+* The total number of printed characters is returned as the return value of the `ft_printf` function. (Length of the linked list)

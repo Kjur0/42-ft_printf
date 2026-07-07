@@ -1,5 +1,5 @@
 - [ ] move libft away from submodules
-- [ ] ensure `README.md` is up to date (add justifications for bonus)
+- [x] ensure `README.md` is up to date (add justifications for bonus)
 - [ ] add documentation
-- [ ] move *bonus* into `srcs/bonus`
+- [x] move *bonus* into `srcs/bonus`
 - [ ] remove `TODO.md` file
