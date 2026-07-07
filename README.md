@@ -4,6 +4,10 @@
 
 `libftprintf` is a custom implementation of the standard C `printf` function. It is designed to provide similar functionality while allowing for additional features and optimizations.
 
+> [!IMPORTANT]
+> `ft_printf` requires presence of `libft` library.  
+> By default it is directly embedded into the `libftprintf` library 
+
 ## Description
 
 `ft_printf` is a variadic function that formats and prints data to the standard output. It supports a variety of format specifiers:
