@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/01 20:58:26 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/07 10:44:51 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_printf_width(const char **str)
 	return (res);
 }
 
-/** @brief print data subsituting the formatter
+/** @brief print data substituting the formatter
  *
  * @see ft_printf_format()
  * @see ft_printf_c()
@@ -70,6 +70,20 @@ static void	ft_putfmt(const char **fmt, va_list args, t_list **lst,
 	(*fmt)++;
 }
 
+/** @brief handle printf formatters and flags
+ *
+ * Printing is delegated to ft_putfmt()
+ *
+ * @see ft_printf()
+ * @see ft_printf_width()
+ * @see ft_putfmt()
+ *
+ * @internal helper for ft_printf()
+ * @param fmt	pointer to current format string position
+ * @param args	variadic arguments list
+ * @param lst	pointer to linked list
+ * @return number of characters printed
+ */
 static void	ft_printf_format(const char **fmt, va_list args, t_list **lst)
 {
 	t_printf_flags	flags;
@@ -99,6 +113,14 @@ static void	ft_printf_format(const char **fmt, va_list args, t_list **lst)
 	}
 }
 
+/** @brief print linked list
+ *
+ * @see ::t_char
+ *
+ * @internal helper for ft_printf
+ * @param lst linked list to print
+ * @return number of characters printed
+*/
 static int	ft_lst_print(t_list *lst)
 {
 	t_list	*next;

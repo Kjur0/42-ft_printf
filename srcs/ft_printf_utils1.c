@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 18:11:31 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/01 20:57:29 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/07 10:44:15 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,19 @@ int	ft_putchar(char c)
  */
 int	ft_putstr(char *str)
 {
+	if (!str)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
 	ft_putstr_fd(str, 1);
 	return (ft_strlen(str));
 }
 
-/** @brief print adress onto screen
+/** @brief print address onto screen
  *
  * @internal helper for ft_putptr()
- * @param ptr adress to print
+ * @param ptr address to print
  * @return number of characters printed
  */
 static int	ft_putaddress(size_t ptr)

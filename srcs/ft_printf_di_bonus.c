@@ -6,12 +6,18 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:48:06 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/01 18:29:18 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/07 10:48:29 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf_utils_bonus.h>
 
+/** @brief calculate length of integer in decimal
+ *
+ * @internal helper for ft_printf_di()
+ * @param nbr	number
+ * @return length of integer
+ */
 static int	ft_nbr_len(int nbr)
 {
 	int	len;
@@ -28,6 +34,12 @@ static int	ft_nbr_len(int nbr)
 	return (len);
 }
 
+/** @brief print integer in decimal
+ *
+ * @internal helper for ft_printf_di()
+ * @param nbr	number
+ * @param lst	pointer to linked list
+*/
 static void	ft_print_nbr(int nbr, t_list **lst)
 {
 	char	c;
@@ -46,6 +58,26 @@ static void	ft_print_nbr(int nbr, t_list **lst)
 	ft_lst_char(lst, c);
 }
 
+/** @brief print digit/integer
+ *
+ * add integer's digits to linked list handling all necessary flags
+ *
+ * Supported flags:
+ * * `-`
+ * * `0`
+ * * `.`
+ * * `<width>`
+ * * ` `
+ * * `+`
+ *
+ * @see ft_putfmt()
+ * @see t_printf_flags
+ *
+ * @internal handler for `%d` & `%i`
+ * @param i		integer to print
+ * @param lst	pointer to linked list
+ * @param flags	flags for printing
+ */
 void	ft_printf_di(int i, t_list **lst, t_printf_flags flags)
 {
 	const int	len = ft_nbr_len(i);

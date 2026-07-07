@@ -6,7 +6,7 @@
 #    By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/30 17:19:04 by kjurkows          #+#    #+#              #
-#    Updated: 2026/07/01 19:30:00 by kjurkows         ###   ########.fr        #
+#    Updated: 2026/07/03 16:19:04 by kjurkows         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ BONUS_OBJS	=	$(BONUS_SRCS:%.c=$(OBJS_DIR)/%.o)
 LIBFT_OBJS	=	$(LIBFTA_OBJS:%.o=$(OBJS_DIR)/libft/%.o)
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -I$(LIBFT_DIR) -Iincludes
+CFLAGS		=	-Wall -Wextra -Werror -I$(LIBFT_DIR) -Iincludes -fPIC
 AR			=	ar rcs
 ARX			=	ar xo --output=$(OBJS_DIR)/libft
 RM			=	rm -rf

@@ -6,12 +6,18 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 18:28:40 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/01 18:43:37 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/07 10:52:40 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf_utils_bonus.h>
 
+/** @brief calculate length of unsigned integer in decimal
+ *
+ * @internal helper fot ft_printf_u()
+ * @param nbr	unsigned integer
+ * @return length of unsigned integer
+ */
 static int	ft_nbr_len(unsigned int nbr)
 {
 	int	len;
@@ -26,6 +32,12 @@ static int	ft_nbr_len(unsigned int nbr)
 	return (len);
 }
 
+/** @brief print unsigned integer in decimal
+ *
+ * @internal helper for ft_printf_u()
+ * @param nbr	unsigned integer to print
+ * @param lst	pointer to linked list
+ */
 static void	ft_print_nbr(int nbr, t_list **lst)
 {
 	char	c;
@@ -36,6 +48,24 @@ static void	ft_print_nbr(int nbr, t_list **lst)
 	ft_lst_char(lst, c);
 }
 
+/** @brief print unsigned integer
+ *
+ * add unsigned integer's digits to linked list handling all necessary flags
+ *
+ * Supported flags:
+ * * `-`
+ * * `0`
+ * * `.`
+ * * `<width>`
+ *
+ * @see ft_putfmt()
+ * @see t_printf_flags
+ *
+ * @internal handler for `%u`
+ * @param u		unsigned integer to print
+ * @param lst	pointer to linked list
+ * @param flags	flags for printing
+ */
 void	ft_printf_u(unsigned int u, t_list **lst, t_printf_flags flags)
 {
 	const int	len = ft_nbr_len(u);

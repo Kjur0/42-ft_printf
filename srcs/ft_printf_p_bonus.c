@@ -6,12 +6,18 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 15:28:40 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/01 18:15:44 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/07 10:47:31 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf_utils_bonus.h>
 
+/** @brief calculate length of address in hexadecimal
+ *
+ * @internal helper for ft_printf_p()
+ * @param ptr	address of a pointer
+ * @return length of address
+ */
 static int	ft_hex_len(size_t ptr)
 {
 	int	len;
@@ -26,6 +32,12 @@ static int	ft_hex_len(size_t ptr)
 	return (len);
 }
 
+/** @brief print address in hexadecimal
+ *
+ * @internal helper for ft_printf_p()
+ * @param ptr	address of a pointer
+ * @param lst	pointer to linked list
+ */
 static void	ft_print_hex(size_t ptr, t_list **lst)
 {
 	char	c;
@@ -41,6 +53,26 @@ static void	ft_print_hex(size_t ptr, t_list **lst)
 	ft_lst_char(lst, c);
 }
 
+/** @brief print pointer
+ *
+ * add pointer's address to linked list handling all necessary flags
+ *
+ * Supported flags:
+ * * `-`
+ * * `0`
+ * * `.`
+ * * `<width>`
+ * * ` `
+ * * `+`
+ *
+ * @see ft_putfmt()
+ * @see t_printf_flags
+ *
+ * @internal handler for `%p`
+ * @param p		pointer which address to print
+ * @param lst	pointer to linked list
+ * @param flags	flags for printing
+ */
 void	ft_printf_p(void *p, t_list **lst, t_printf_flags flags)
 {
 	const int	len = ft_hex_len((size_t)p);
