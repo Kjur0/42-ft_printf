@@ -6,7 +6,7 @@
 #    By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/30 17:19:04 by kjurkows          #+#    #+#              #
-#    Updated: 2026/07/03 16:19:04 by kjurkows         ###   ########.fr        #
+#    Updated: 2026/07/07 11:08:41 by kjurkows         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ LIBFTA_OBJS	=	ft_isalpha.o \
 
 OBJS_DIR	=	objs
 OBJS		=	$(SRCS:%.c=$(OBJS_DIR)/%.o)
-BONUS_OBJS	=	$(BONUS_SRCS:%.c=$(OBJS_DIR)/%.o)
+BONUS_OBJS	=	$(BONUS_SRCS:%.c=$(OBJS_DIR)/bonus/%.o)
 LIBFT_OBJS	=	$(LIBFTA_OBJS:%.o=$(OBJS_DIR)/libft/%.o)
 
 CC			=	cc
@@ -119,6 +119,11 @@ $(LIBFT):
 
 $(OBJS_DIR)/libft/%.o: $(LIBFT) | $(OBJS_DIR)
 	@$(ARX) $(LIBFT) $(notdir $@)
+	
+$(OBJS_DIR)/bonus/%.o: $(SRCS_DIR)/bonus/%.c | $(OBJS_DIR)
+	@echo -n "$(YELLOW)Compiling $<...$(RESET)"
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(POSITION)$(GREEN)Compiled $(basename $(notdir $<)) successfully!$(RESET)"
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
 	@echo -n "$(YELLOW)Compiling $<...$(RESET)"
@@ -128,6 +133,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(OBJS_DIR)/libft
+	@mkdir -p $(OBJS_DIR)/bonus
 	@echo "$(CYAN)Created objects directory.$(RESET)"
 
 clean:
