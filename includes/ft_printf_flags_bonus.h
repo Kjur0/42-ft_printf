@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 20:40:29 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/01 20:57:57 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 17:00:32 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ typedef struct s_printf_flags
  * @internal
  * @return default ::t_printf_flags
 */
-t_printf_flags	new_printf_flags(void);
+t_printf_flags	*new_printf_flags(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 15:28:40 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 14:29:52 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 17:10:28 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,31 +72,31 @@ static void	ft_print_hex(size_t ptr, t_list **lst)
  * @internal handler for `%p`
  * @param p		pointer which address to print
  * @param lst	pointer to linked list
- * @param flags	flags for printing
+ * @param f	flags for printing
  */
-void	ft_printf_p(void *p, t_list **lst, t_printf_flags flags)
+void	ft_printf_p(void *p, t_list **lst, t_printf_flags *f)
 {
 	const int	len = ft_hex_len((size_t)p);
 
-	if (flags.pad_zero && flags.precision == -1)
-		flags.precision = flags.min_width - 2;
-	if (len > flags.precision)
-		flags.precision = len + (p == 0) * 3;
-	if (flags.precision + 2 + (flags.sign || flags.space) < flags.min_width)
-		flags.min_width -= flags.precision + 2 + (flags.sign || flags.space);
+	if (f->pad_zero && f->precision == -1)
+		f->precision = f->min_width - 2;
+	if (len > f->precision)
+		f->precision = len + (p == 0) * 3;
+	if (f->precision + 2 + (f->sign || f->space) < f->min_width)
+		f->min_width -= f->precision + 2 + (f->sign || f->space);
 	else
-		flags.min_width = 0;
-	while (!flags.align_left && flags.min_width--)
+		f->min_width = 0;
+	while (!f->align_left && f->min_width--)
 		ft_lst_char(lst, ' ');
-	if (flags.sign && p != 0)
+	if (f->sign && p != 0)
 		ft_lst_char(lst, '+');
-	else if (flags.space && p != 0)
+	else if (f->space && p != 0)
 		ft_lst_char(lst, ' ');
 	if (p != 0)
 		ft_lst_str(lst, "0x");
-	while (flags.precision-- > len && p != 0)
+	while (f->precision-- > len && p != 0)
 		ft_lst_char(lst, '0');
 	ft_print_hex((size_t) p, lst);
-	while (flags.align_left && flags.min_width--)
+	while (f->align_left && f->min_width--)
 		ft_lst_char(lst, ' ');
 }

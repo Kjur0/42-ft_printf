@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/07 11:59:21 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 17:08:24 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static int	ft_printf_width(const char **str)
  * @param args	variadic arguments list
  * @param lst	pointer to linked list
 */
-static void	ft_putfmt(const char **fmt, va_list args, t_list **lst,
-	t_printf_flags flags)
+static int	ft_putfmt(const char **fmt, va_list args, t_list **lst,
+	t_printf_flags *flags)
 {
 	if (**fmt == 'c')
 		ft_printf_c(va_arg(args, int), lst, flags);
@@ -67,7 +67,15 @@ static void	ft_putfmt(const char **fmt, va_list args, t_list **lst,
 		ft_printf_x(va_arg(args, unsigned int), lst, flags, **fmt);
 	else if (**fmt == '%')
 		ft_lst_char(lst, **fmt);
+	else
+	{
+		(*fmt)++;
+		free(flags);
+		return (1);
+	}
 	(*fmt)++;
+	free(flags);
+	return (0);
 }
 
 /** @brief handle printf formatters and flags
@@ -84,33 +92,33 @@ static void	ft_putfmt(const char **fmt, va_list args, t_list **lst,
  * @param lst	pointer to linked list
  * @return number of characters printed
  */
-static void	ft_printf_format(const char **fmt, va_list args, t_list **lst)
+static int	ft_printf_format(const char **fmt, va_list args, t_list **lst)
 {
-	t_printf_flags	flags;
+	t_printf_flags *const	flags = new_printf_flags();
 
-	flags = new_printf_flags();
 	while (*++(*fmt))
 	{
 		if (**fmt == '-')
-			flags.align_left = 1;
+			flags->align_left = 1;
 		else if (**fmt == '0')
-			flags.pad_zero = 1;
+			flags->pad_zero = 1;
 		else if (**fmt == '.')
 		{
 			(*fmt)++;
-			flags.precision = ft_printf_width(fmt);
+			flags->precision = ft_printf_width(fmt);
 		}
 		else if (**fmt == '#')
-			flags.alternate = 1;
+			flags->alternate = 1;
 		else if (**fmt == ' ')
-			flags.space = 1;
+			flags->space = 1;
 		else if (**fmt == '+')
-			flags.sign = 1;
+			flags->sign = 1;
 		else if (ft_isdigit(**fmt))
-			flags.min_width = ft_printf_width(fmt);
+			flags->min_width = ft_printf_width(fmt);
 		else
 			return (ft_putfmt(fmt, args, lst, flags));
 	}
+	return (1);
 }
 
 /** @brief print linked list
@@ -190,7 +198,11 @@ int	ft_printf(const char *str, ...)
 	{
 		if (*str == '%')
 		{
-			ft_printf_format(&str, args, &lst);
+			if (ft_printf_format(&str, args, &lst))
+			{
+				ft_lstclear(&lst, free);
+				return (-1);
+			}
 			continue ;
 		}
 		ft_lst_char(&lst, *str++);

@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/07 11:59:11 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 17:07:59 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	ft_printf_format(const char fmt, va_list args)
 		return (ft_puthex(va_arg(args, unsigned), 1));
 	else if (fmt == '%')
 		return (ft_putchar('%'));
-	return (0);
+	return (-1);
 }
 
 /** @brief print a formatted string to `STDOUT` substituting with correct data
@@ -96,6 +96,7 @@ int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	int		chars;
+	int		tmp;
 
 	chars = 0;
 	va_start(args, str);
@@ -103,7 +104,12 @@ int	ft_printf(const char *str, ...)
 	{
 		if (*str == '%')
 		{
-			chars += ft_printf_format(*++str, args);
+			tmp = ft_printf_format(*++str, args);
+			if (tmp == -1)
+			{
+				return (-1);
+			}
+			chars += tmp;
 			str++;
 			continue ;
 		}

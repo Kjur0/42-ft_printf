@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 13:36:29 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/07 10:43:44 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 17:03:23 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@
  * @param lst	pointer to linked list
  * @param flags	flags for printing
  */
-void	ft_printf_c(char c, t_list **lst, t_printf_flags flags)
+void	ft_printf_c(char c, t_list **lst, t_printf_flags *flags)
 {
-	if (flags.align_left)
+	if (flags->align_left)
 		ft_lst_char(lst, c);
-	while (flags.min_width-- > 1)
+	while (flags->min_width-- > 1)
 		ft_lst_char(lst, ' ');
-	if (!flags.align_left)
+	if (!flags->align_left)
 		ft_lst_char(lst, c);
 }
