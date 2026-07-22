@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 17:21:52 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 18:08:24 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <ft_printf_utils_bonus.h>
 
 #include <stdarg.h>
-#include <stdlib.h>
 
 /** @brief get the width for a formatter
  *
@@ -53,6 +52,11 @@ static int	ft_printf_width(const char **str)
 static int	ft_putfmt(const char **fmt, va_list args, t_list **lst,
 	t_printf_flags *flags)
 {
+	if (**fmt == 0)
+	{
+		free(flags);
+		return (-1);
+	}
 	if (**fmt == 'c')
 		ft_printf_c(va_arg(args, int), lst, flags);
 	else if (**fmt == 's')
@@ -65,16 +69,13 @@ static int	ft_putfmt(const char **fmt, va_list args, t_list **lst,
 		ft_printf_u(va_arg(args, unsigned int), lst, flags);
 	else if (**fmt == 'x' || **fmt == 'X')
 		ft_printf_x(va_arg(args, unsigned int), lst, flags, **fmt);
-	else if (**fmt == '%')
-		ft_lst_char(lst, **fmt);
 	else
 	{
-		(*fmt)++;
-		free(flags);
-		return (1);
+		if (**fmt != '%')
+			ft_lst_char(lst, '%');
+		ft_lst_char(lst, **fmt);
 	}
 	(*fmt)++;
-	free(flags);
 	return (0);
 }
 
@@ -118,7 +119,7 @@ static int	ft_printf_format(const char **fmt, va_list args, t_list **lst)
 		else
 			return (ft_putfmt(fmt, args, lst, flags));
 	}
-	return (1);
+	return (ft_putfmt(fmt, args, lst, flags));
 }
 
 /** @brief print linked list
@@ -201,6 +202,7 @@ int	ft_printf(const char *str, ...)
 			if (ft_printf_format(&str, args, &lst))
 			{
 				ft_lst_print(lst);
+				va_end(args);
 				return (-1);
 			}
 			continue ;

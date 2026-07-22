@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 14:53:40 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 17:03:47 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 18:03:40 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ void	ft_printf_s(char *s, t_list **lst, t_printf_flags *flags)
 		ft_lst_char(lst, *s++);
 	while (flags->align_left && flags->min_width--)
 		ft_lst_char(lst, ' ');
+	free(flags);
 }

@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 15:28:40 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 17:10:28 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 18:03:38 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,5 @@ void	ft_printf_p(void *p, t_list **lst, t_printf_flags *f)
 	ft_print_hex((size_t) p, lst);
 	while (f->align_left && f->min_width--)
 		ft_lst_char(lst, ' ');
+	free(f);
 }

@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 18:44:58 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 17:06:18 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 18:03:44 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,5 @@ void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags, char c)
 		ft_print_hex(x, lst, c == 'X');
 	while (flags->align_left && flags->min_width--)
 		ft_lst_char(lst, ' ');
+	free(flags);
 }

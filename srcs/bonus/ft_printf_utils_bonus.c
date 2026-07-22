@@ -6,13 +6,11 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 21:30:21 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/07 10:44:04 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 18:03:47 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf_utils_bonus.h>
-
-#include <stdlib.h>
 
 /** @brief add character to linked list
  *

@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 21:09:42 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 17:07:32 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 18:03:29 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <ft_printf.h>
 # include <ft_printf_flags_bonus.h>
+
+# include <stdlib.h>
 
 /** @brief print character
  *
