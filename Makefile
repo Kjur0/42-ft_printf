@@ -6,7 +6,7 @@
 #    By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/30 17:19:04 by kjurkows          #+#    #+#              #
-#    Updated: 2026/07/07 12:40:26 by kjurkows         ###   ########.fr        #
+#    Updated: 2026/07/22 14:00:02 by kjurkows         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ BONUS_SRCS	=	ft_printf_bonus.c \
 OBJS_DIR	=	objs
 OBJS		=	$(SRCS:%.c=$(OBJS_DIR)/%.o)
 BONUS_OBJS	=	$(BONUS_SRCS:%.c=$(OBJS_DIR)/bonus/%.o)
-LIBFT_OBJS	=	$(LIBFTA_OBJS:%.o=$(OBJS_DIR)/libft/%.o)
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -I$(LIBFT_DIR) -Iincludes -fPIC
@@ -92,12 +91,21 @@ $(OBJS_DIR):
 	@echo "$(CYAN)Created objects directory.$(RESET)"
 
 clean:
+	@if [ -d $(LIBFT) ]; then \
+		echo -n "$(BLUE)Cleaning libft...$(RESET)"; \
+		$(MAKE) -C $(LIBFT_DIR) clean > /dev/null; \
+		echo "$(POSITION)$(GREEN)Libft cleaned successfully!$(RESET)"; \
+	fi
 	@$(MAKE) -C $(LIBFT_DIR) clean > /dev/null
 	@$(RM) $(OBJS_DIR)
 	@echo "$(RED)Cleaned object files.$(RESET)"
 
 fclean: clean
-	@$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null
+	@if [ -d $(LIBFT) ]; then \
+		echo -n "$(BLUE)Fully cleaning libft...$(RESET)"; \
+		$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null; \
+		echo "$(POSITION)$(GREEN)Libft fully cleaned successfully!$(RESET)"; \
+	fi
 	@$(RM) $(NAME)
 	@echo "$(RED)Fully cleaned all generated files.$(RESET)"
 

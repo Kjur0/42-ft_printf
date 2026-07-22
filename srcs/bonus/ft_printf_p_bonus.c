@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 15:28:40 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/07 10:47:31 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 14:29:52 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static int	ft_hex_len(size_t ptr)
 {
 	int	len;
 
-	len = 1;
-	ptr /= 0x10;
+	len = 0;
 	while (ptr)
 	{
 		len++;
@@ -43,6 +42,8 @@ static void	ft_print_hex(size_t ptr, t_list **lst)
 	char	c;
 	int		res;
 
+	if (ptr == 0)
+		return (ft_lst_str(lst, "(nil)"));
 	if (ptr > 0xF)
 		ft_print_hex(ptr / 0x10, lst);
 	res = ptr % 0x10;
@@ -77,24 +78,23 @@ void	ft_printf_p(void *p, t_list **lst, t_printf_flags flags)
 {
 	const int	len = ft_hex_len((size_t)p);
 
-	if (!p)
-		return (ft_printf_s("(nil)", lst, flags));
 	if (flags.pad_zero && flags.precision == -1)
 		flags.precision = flags.min_width - 2;
 	if (len > flags.precision)
-		flags.precision = len;
+		flags.precision = len + (p == 0) * 3;
 	if (flags.precision + 2 + (flags.sign || flags.space) < flags.min_width)
 		flags.min_width -= flags.precision + 2 + (flags.sign || flags.space);
 	else
 		flags.min_width = 0;
 	while (!flags.align_left && flags.min_width--)
 		ft_lst_char(lst, ' ');
-	if (flags.sign)
+	if (flags.sign && p != 0)
 		ft_lst_char(lst, '+');
-	else if (flags.space)
+	else if (flags.space && p != 0)
 		ft_lst_char(lst, ' ');
-	ft_lst_str(lst, "0x");
-	while (flags.precision-- > len)
+	if (p != 0)
+		ft_lst_str(lst, "0x");
+	while (flags.precision-- > len && p != 0)
 		ft_lst_char(lst, '0');
 	ft_print_hex((size_t) p, lst);
 	while (flags.align_left && flags.min_width--)

@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:48:06 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/07 10:48:29 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/20 18:09:55 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ static int	ft_nbr_len(int nbr)
 {
 	int	len;
 
-	len = 1;
+	len = 0;
 	if (nbr < 0)
 		len++;
-	len /= 10;
 	while (nbr)
 	{
 		len++;
@@ -85,7 +84,7 @@ void	ft_printf_di(int i, t_list **lst, t_printf_flags flags)
 	if (flags.pad_zero && flags.precision == -1)
 		flags.precision = flags.min_width;
 	if (len > flags.precision)
-		flags.precision = len;
+		flags.precision = len + (i == 0);
 	if (flags.precision + (flags.sign || flags.space) < flags.min_width)
 		flags.min_width -= flags.precision + (flags.sign || flags.space);
 	else
@@ -98,7 +97,8 @@ void	ft_printf_di(int i, t_list **lst, t_printf_flags flags)
 		ft_lst_char(lst, ' ');
 	while (flags.precision-- > len)
 		ft_lst_char(lst, '0');
-	ft_print_nbr(i, lst);
+	if (i != 0)
+		ft_print_nbr(i, lst);
 	while (flags.align_left && flags.min_width--)
 		ft_lst_char(lst, ' ');
 }

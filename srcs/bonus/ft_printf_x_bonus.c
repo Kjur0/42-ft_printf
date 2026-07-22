@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 18:44:58 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/07 10:57:48 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/20 18:11:05 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static int	ft_hex_len(unsigned int nbr)
 {
 	int	len;
 
-	len = 1;
-	nbr /= 0x10;
+	len = 0;
 	while (nbr)
 	{
 		len++;
@@ -84,7 +83,7 @@ void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags f, char c)
 	if (f.pad_zero && f.precision == -1)
 		f.precision = f.min_width - (f.alternate && x != 0) * 2;
 	if (len > f.precision)
-		f.precision = len;
+		f.precision = len + (x == 0);
 	if (f.precision + 2 * (f.alternate && x != 0) < f.min_width)
 		f.min_width -= f.precision + 2 * (f.alternate && x != 0);
 	else
@@ -97,7 +96,8 @@ void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags f, char c)
 		ft_lst_str(lst, "0X");
 	while (f.precision-- > len)
 		ft_lst_char(lst, '0');
-	ft_print_hex(x, lst, c == 'X');
+	if (x != 0)
+		ft_print_hex(x, lst, c == 'X');
 	while (f.align_left && f.min_width--)
 		ft_lst_char(lst, ' ');
 }
