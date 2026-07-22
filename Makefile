@@ -6,7 +6,7 @@
 #    By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/30 17:19:04 by kjurkows          #+#    #+#              #
-#    Updated: 2026/07/22 14:00:02 by kjurkows         ###   ########.fr        #
+#    Updated: 2026/07/22 14:59:17 by kjurkows         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,7 @@ $(OBJS_DIR):
 	@echo "$(CYAN)Created objects directory.$(RESET)"
 
 clean:
-	@if [ -d $(LIBFT) ]; then \
+	@if [ -f $(LIBFT) ]; then \
 		echo -n "$(BLUE)Cleaning libft...$(RESET)"; \
 		$(MAKE) -C $(LIBFT_DIR) clean > /dev/null; \
 		echo "$(POSITION)$(GREEN)Libft cleaned successfully!$(RESET)"; \
@@ -101,7 +101,7 @@ clean:
 	@echo "$(RED)Cleaned object files.$(RESET)"
 
 fclean: clean
-	@if [ -d $(LIBFT) ]; then \
+	@if [ -f $(LIBFT) ]; then \
 		echo -n "$(BLUE)Fully cleaning libft...$(RESET)"; \
 		$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null; \
 		echo "$(POSITION)$(GREEN)Libft fully cleaned successfully!$(RESET)"; \
