@@ -6,7 +6,7 @@
 #    By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/30 17:19:04 by kjurkows          #+#    #+#              #
-#    Updated: 2026/07/22 14:59:17 by kjurkows         ###   ########.fr        #
+#    Updated: 2026/07/22 15:01:19 by kjurkows         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,22 +92,23 @@ $(OBJS_DIR):
 
 clean:
 	@if [ -f $(LIBFT) ]; then \
-		echo -n "$(BLUE)Cleaning libft...$(RESET)"; \
+		echo -n "$(YELLOW)Cleaning libft...$(RESET)"; \
 		$(MAKE) -C $(LIBFT_DIR) clean > /dev/null; \
-		echo "$(POSITION)$(GREEN)Libft cleaned successfully!$(RESET)"; \
+		echo "$(POSITION)$(RED)Libft cleaned successfully!$(RESET)"; \
 	fi
-	@$(MAKE) -C $(LIBFT_DIR) clean > /dev/null
+	@echo -n "$(YELLOW)Cleaning object files...$(RESET)"
 	@$(RM) $(OBJS_DIR)
-	@echo "$(RED)Cleaned object files.$(RESET)"
+	@echo "$(POSITION)$(RED)Cleaned object files.$(RESET)"
 
 fclean: clean
 	@if [ -f $(LIBFT) ]; then \
-		echo -n "$(BLUE)Fully cleaning libft...$(RESET)"; \
+		echo -n "$(YELLOW)Fully cleaning libft...$(RESET)"; \
 		$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null; \
-		echo "$(POSITION)$(GREEN)Libft fully cleaned successfully!$(RESET)"; \
+		echo "$(POSITION)$(RED)Libft fully cleaned successfully!$(RESET)"; \
 	fi
+	@echo -n "$(YELLOW)Removing $(NAME)...$(RESET)"
 	@$(RM) $(NAME)
-	@echo "$(RED)Fully cleaned all generated files.$(RESET)"
+	@echo "$(POSITION)$(RED)Fully cleaned all generated files.$(RESET)"
 
 
 re: fclean all
