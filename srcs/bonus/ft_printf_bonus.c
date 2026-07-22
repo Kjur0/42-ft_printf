@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 17:08:24 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/22 17:21:52 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ int	ft_printf(const char *str, ...)
 		{
 			if (ft_printf_format(&str, args, &lst))
 			{
-				ft_lstclear(&lst, free);
+				ft_lst_print(lst);
 				return (-1);
 			}
 			continue ;
