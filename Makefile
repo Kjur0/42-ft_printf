@@ -6,13 +6,15 @@
 #    By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/30 17:19:04 by kjurkows          #+#    #+#              #
-#    Updated: 2026/07/22 15:01:19 by kjurkows         ###   ########.fr        #
+#    Updated: 2026/07/22 16:14:41 by kjurkows         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libftprintf.a
 
 LIBFT_DIR	=	libft
+LIBFT_MAKE	=	$(LIBFT_DIR)/Makefile
+LIBFT_H		=	$(LIBFT_DIR)/libft.h
 LIBFT		=	$(LIBFT_DIR)/libft.a
 
 SRCS_DIR	=	srcs
@@ -37,7 +39,6 @@ BONUS_OBJS	=	$(BONUS_SRCS:%.c=$(OBJS_DIR)/bonus/%.o)
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -I$(LIBFT_DIR) -Iincludes -fPIC
 AR			=	ar rcs
-ARX			=	ar xo --output=$(OBJS_DIR)/libft
 RM			=	rm -rf
 
 RED			=	\033[;31m
@@ -54,44 +55,47 @@ MAKEFLAGS += --no-print-directory
 all: $(NAME)
 	@echo "$(GREEN)$(NAME) is ready to use.$(RESET)"
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(LIBFT) $(OBJS)
 	@echo -n "$(BLUE)Creating $(NAME)...$(RESET)"
 	@cp $(LIBFT) $(NAME)
 	@$(AR) $(NAME) $(OBJS)
 	@echo "$(POSITION)$(GREEN)$(NAME) has been created successfully!$(RESET)"
 
-bonus: $(BONUS_OBJS) $(LIBFT)
+bonus: $(LIBFT) $(BONUS_OBJS)
 	@echo -n "$(BLUE)Creating $(NAME) with bonus...$(RESET)"
 	@cp $(LIBFT) $(NAME)
 	@$(AR) $(NAME) $(BONUS_OBJS)
 	@echo "$(POSITION)$(GREEN)$(NAME) with bonus has been created successfully!$(RESET)"
 
-$(LIBFT):
-	@echo -n "$(BLUE)Initializing and updating libft submodule...$(RESET)"
-	@git submodule update --init --recursive > /dev/null 2> /dev/null
-	@echo "$(POSITION)$(GREEN)Libft submodule is ready!$(RESET)"
+$(LIBFT): $(LIBFT_MAKE)
 	@echo -n "$(BLUE)Compiling libft...$(RESET)"
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
 	@echo "$(POSITION)$(GREEN)Libft has been compiled successfully!$(RESET)"
 
-$(OBJS_DIR)/bonus/%.o: $(SRCS_DIR)/bonus/%.c $(LIBFT) | $(OBJS_DIR)
+$(LIBFT_H): $(LIBFT_MAKE)
+
+$(LIBFT_MAKE):
+	@echo -n "$(BLUE)Initializing and updating libft submodule...$(RESET)"
+	@git submodule update --init --recursive > /dev/null 2> /dev/null
+	@echo "$(POSITION)$(GREEN)Libft submodule is ready!$(RESET)"
+
+$(OBJS_DIR)/bonus/%.o: $(LIBFT_H) $(SRCS_DIR)/bonus/%.c | $(OBJS_DIR)
 	@echo -n "$(YELLOW)Compiling $(basename $(notdir $<))...$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(POSITION)$(GREEN)Compiled $(basename $(notdir $<)) successfully!$(RESET)"
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(LIBFT) | $(OBJS_DIR)
+$(OBJS_DIR)/%.o: $(LIBFT_H) $(SRCS_DIR)/%.c | $(OBJS_DIR)
 	@echo -n "$(YELLOW)Compiling $(basename $(notdir $<))...$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(POSITION)$(GREEN)Compiled $(basename $(notdir $<)) successfully!$(RESET)"
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
-	@mkdir -p $(OBJS_DIR)/libft
 	@mkdir -p $(OBJS_DIR)/bonus
 	@echo "$(CYAN)Created objects directory.$(RESET)"
 
 clean:
-	@if [ -f $(LIBFT) ]; then \
+	@if [ -f $(LIBFT_MAKE) ]; then \
 		echo -n "$(YELLOW)Cleaning libft...$(RESET)"; \
 		$(MAKE) -C $(LIBFT_DIR) clean > /dev/null; \
 		echo "$(POSITION)$(RED)Libft cleaned successfully!$(RESET)"; \
@@ -101,7 +105,7 @@ clean:
 	@echo "$(POSITION)$(RED)Cleaned object files.$(RESET)"
 
 fclean: clean
-	@if [ -f $(LIBFT) ]; then \
+	@if [ -f $(LIBFT_MAKE) ]; then \
 		echo -n "$(YELLOW)Fully cleaning libft...$(RESET)"; \
 		$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null; \
 		echo "$(POSITION)$(RED)Libft fully cleaned successfully!$(RESET)"; \
