@@ -1,6 +1,6 @@
 *This project has been created as part of the 42 curriculum by **kjurkows***
 
-# ft_printf
+# ![ft_printf](../../../../ayogun/42-project-badges/blob/main/badges/ft_printfn.png)
 
 `libftprintf` is a custom implementation of the standard C `printf` function. It is designed to provide similar functionality while allowing for additional features and optimizations.
 
