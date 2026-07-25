@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 18:28:40 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 18:03:42 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/25 21:53:01 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_printf_u(unsigned int u, t_list **lst, t_printf_flags *flags)
 {
 	const int	len = ft_nbr_len(u);
 
-	if (flags->pad_zero && flags->precision == -1)
+	if (!flags->align_left && flags->pad_zero && flags->precision == -1)
 		flags->precision = flags->min_width;
 	if (len > flags->precision)
 		flags->precision = len + (u == 0);

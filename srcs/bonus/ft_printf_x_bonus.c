@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 18:44:58 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 18:03:44 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/25 21:53:07 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags, char c)
 {
 	const int	len = ft_hex_len(x);
 
-	if (flags->pad_zero && flags->precision == -1)
+	if (!flags->align_left && flags->pad_zero && flags->precision == -1)
 		flags->precision = flags->min_width - (flags->alternate && x != 0) * 2;
 	if (len > flags->precision)
 		flags->precision = len + (x == 0);
