@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:48:06 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/25 21:50:55 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/25 21:57:03 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ static int	ft_nbr_len(int nbr)
 	int	len;
 
 	len = 0;
-	if (nbr < 0)
-		len++;
 	while (nbr)
 	{
 		len++;
