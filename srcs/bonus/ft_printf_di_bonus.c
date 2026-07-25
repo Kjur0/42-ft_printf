@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:48:06 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 17:59:39 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/25 21:45:10 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void	ft_print_nbr(int nbr, t_list **lst)
 
 	if (nbr < 0)
 	{
-		ft_lst_char(lst, '-');
 		if (nbr < -9)
 			ft_print_nbr(-(nbr / 10), lst);
 		c = '0' - nbr % 10;
@@ -95,6 +94,8 @@ void	ft_printf_di(int i, t_list **lst, t_printf_flags *flags)
 		ft_lst_char(lst, '+');
 	else if (flags->space && i >= 0)
 		ft_lst_char(lst, ' ');
+	if (i < 0)
+		ft_lst_char(lst, '-');
 	while (flags->precision-- > len)
 		ft_lst_char(lst, '0');
 	if (i != 0)
