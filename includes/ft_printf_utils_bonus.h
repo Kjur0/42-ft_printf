@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 21:09:42 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 18:03:29 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/29 19:42:32 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,9 @@ void	ft_printf_u(unsigned int u, t_list **lst, t_printf_flags *flags);
  * @param x		unsigned integer to print
  * @param lst	pointer to linked list
  * @param flags flags for printing
- * @param c		`'x'` or `'X'` for determining case
+ * @param c	whether to use uppercase
  */
-void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags,
-			char c);
+void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags, int c);
 
 /** @brief basic container for a character
  *

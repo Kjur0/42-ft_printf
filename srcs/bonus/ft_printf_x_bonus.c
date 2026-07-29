@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 18:44:58 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/25 21:53:07 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/29 19:42:14 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ static void	ft_print_hex(unsigned int nbr, t_list **lst, int big)
  * @param x		unsigned integer to print
  * @param lst	pointer to linked list
  * @param flags flags for printing
- * @param c		`'x'` or `'X'` for determining case
+ * @param c	whether to use uppercase
  */
-void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags, char c)
+void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags, int c)
 {
 	const int	len = ft_hex_len(x);
 
@@ -90,15 +90,14 @@ void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags, char c)
 		flags->min_width = 0;
 	while (!flags->align_left && flags->min_width--)
 		ft_lst_char(lst, ' ');
-	if (flags->alternate && x != 0 && c == 'x')
+	if (flags->alternate && x != 0 && !c)
 		ft_lst_str(lst, "0x");
-	else if (flags->alternate && x != 0 && c == 'X')
+	if (flags->alternate && x != 0 && c)
 		ft_lst_str(lst, "0X");
 	while (flags->precision-- > len)
 		ft_lst_char(lst, '0');
 	if (x != 0)
-		ft_print_hex(x, lst, c == 'X');
+		ft_print_hex(x, lst, c);
 	while (flags->align_left && flags->min_width--)
 		ft_lst_char(lst, ' ');
-	free(flags);
 }

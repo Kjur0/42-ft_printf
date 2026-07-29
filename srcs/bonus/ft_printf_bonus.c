@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 18:08:24 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/29 19:46:05 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,13 @@ static int	ft_printf_width(const char **str)
  * @param fmt	pointer to current position in format string
  * @param args	variadic arguments list
  * @param lst	pointer to linked list
+ * @return status code
+ * @retval 0 success
+ * @retval 1 error
 */
 static int	ft_putfmt(const char **fmt, va_list args, t_list **lst,
 	t_printf_flags *flags)
 {
-	if (**fmt == 0)
-	{
-		free(flags);
-		return (-1);
-	}
 	if (**fmt == 'c')
 		ft_printf_c(va_arg(args, int), lst, flags);
 	else if (**fmt == 's')
@@ -68,13 +66,15 @@ static int	ft_putfmt(const char **fmt, va_list args, t_list **lst,
 	else if (**fmt == 'u')
 		ft_printf_u(va_arg(args, unsigned int), lst, flags);
 	else if (**fmt == 'x' || **fmt == 'X')
-		ft_printf_x(va_arg(args, unsigned int), lst, flags, **fmt);
+		ft_printf_x(va_arg(args, unsigned int), lst, flags, **fmt == 'X');
+	else if (**fmt == '%')
+		ft_lst_char(lst, '%');
 	else
 	{
-		if (**fmt != '%')
-			ft_lst_char(lst, '%');
-		ft_lst_char(lst, **fmt);
+		free(flags);
+		return (1);
 	}
+	free(flags);
 	(*fmt)++;
 	return (0);
 }
@@ -91,7 +91,9 @@ static int	ft_putfmt(const char **fmt, va_list args, t_list **lst,
  * @param fmt	pointer to current format string position
  * @param args	variadic arguments list
  * @param lst	pointer to linked list
- * @return number of characters printed
+ * @return status code
+ * @retval 0 success
+ * @retval 1 error
  */
 static int	ft_printf_format(const char **fmt, va_list args, t_list **lst)
 {
@@ -152,32 +154,25 @@ static int	ft_lst_print(t_list *lst)
  * All formatters start with `%`, then are substituted with data passed as `...`
  *
  * Supported formatters:
- * | Formatter | `vararg` type    | description             |
- * |-----------|------------------|-------------------------|
- * | `%c`      | `char`           | character               |
- * | `%s`      | `char *`         | string                  |
- * | `%p`      | `void *`         | pointer (address)       |
- * | `%d`      | `int`            | decimal                 |
- * | `%i`      | `int`            | integer (signed)        |
- * | `%u`      | `unsigned int`   | unsigned integer        |
- * | `%x`      | `unsigned int`   | hexadecimal (lowercase) |
- * | `%X`      | `unsigned int`   | hexadecimal (uppercase) |
- * | `%%`      | `void` (nothing) | percent (escaped)       |
+ * * `%c`
+ * * `%s`
+ * * `%p`
+ * * `%d`
+ * * `%i`
+ * * `%u`
+ * * `%x`
+ * * `%X`
+ * * `%%`
  *
  * Bonus adds support for following flags
  * (added in between of `%` and specifier):
- * | Flag | Description                           |
- * |------|---------------------------------------|
- * | `-`  | align left                            |
- * | `0`  | zero pad (numbers)                    |
- * | `.`  | precision                             |
- * | `#`  | alternate format (hex with `0x`/`0X`) |
- * | ` `  | leave space for sign (signed numbers) |
- * | `+`  | always print sign (signed numbers)    |
- *
- * Bonus also adds support for minimum width.
- * It is represented as any decimal number in flags.
- * By default data is aligned to right.
+ * * `-`
+ * * `0`
+ * * `.`
+ * * `#`
+ * * ` `
+ * * `+`
+ * * `<width>`
  *
  * Flags requiring length:
  * * `-`

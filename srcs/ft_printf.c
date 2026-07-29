@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 18:05:56 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/29 19:46:12 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,20 @@ static int	ft_printf_format(const char fmt, va_list args)
 {
 	if (fmt == 'c')
 		return (ft_putchar(va_arg(args, int)));
-	else if (fmt == 's')
+	if (fmt == 's')
 		return (ft_putstr(va_arg(args, char *)));
-	else if (fmt == 'p')
+	if (fmt == 'p')
 		return (ft_putptr(va_arg(args, void *)));
-	else if (fmt == 'd' || fmt == 'i')
+	if (fmt == 'd' || fmt == 'i')
 		return (ft_putnbr(va_arg(args, int)));
-	else if (fmt == 'u')
+	if (fmt == 'u')
 		return (ft_putunsigned(va_arg(args, unsigned)));
-	else if (fmt == 'x')
+	if (fmt == 'x')
 		return (ft_puthex(va_arg(args, unsigned), 0));
-	else if (fmt == 'X')
+	if (fmt == 'X')
 		return (ft_puthex(va_arg(args, unsigned), 1));
-	else if (fmt != 0)
-	{
-		if (fmt != '%')
-			ft_putchar('%');
-		return (ft_putchar(fmt) + (fmt != '%'));
-	}
+	if (fmt == '%')
+		return (ft_putchar('%'));
 	return (-1);
 }
 
@@ -60,32 +56,25 @@ static int	ft_printf_format(const char fmt, va_list args)
  * All formatters start with `%`, then are substituted with data passed as `...`
  *
  * Supported formatters:
- * | Formatter | `vararg` type    | description             |
- * |-----------|------------------|-------------------------|
- * | `%c`      | `char`           | character               |
- * | `%s`      | `char *`         | string                  |
- * | `%p`      | `void *`         | pointer (address)       |
- * | `%d`      | `int`            | decimal                 |
- * | `%i`      | `int`            | integer (signed)        |
- * | `%u`      | `unsigned int`   | unsigned integer        |
- * | `%x`      | `unsigned int`   | hexadecimal (lowercase) |
- * | `%X`      | `unsigned int`   | hexadecimal (uppercase) |
- * | `%%`      | `void` (nothing) | percent (escaped)       |
+ * * `%c`
+ * * `%s`
+ * * `%p`
+ * * `%d`
+ * * `%i`
+ * * `%u`
+ * * `%x`
+ * * `%X`
+ * * `%%`
  *
  * Bonus adds support for following flags
  * (added in between of `%` and specifier):
- * | Flag | Description                           |
- * |------|---------------------------------------|
- * | `-`  | align left                            |
- * | `0`  | zero pad (numbers)                    |
- * | `.`  | precision                             |
- * | `#`  | alternate format (hex with `0x`/`0X`) |
- * | ` `  | leave space for sign (signed numbers) |
- * | `+`  | always print sign (signed numbers)    |
- *
- * Bonus also adds support for minimum width.
- * It is represented as any decimal number in flags.
- * By default data is aligned to right.
+ * * `-`
+ * * `0`
+ * * `.`
+ * * `#`
+ * * ` `
+ * * `+`
+ * * `<width>`
  *
  * Flags requiring length:
  * * `-`
