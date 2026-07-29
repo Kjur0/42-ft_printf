@@ -6,7 +6,7 @@
 #    By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/30 17:19:04 by kjurkows          #+#    #+#              #
-#    Updated: 2026/07/22 17:04:56 by kjurkows         ###   ########.fr        #
+#    Updated: 2026/07/29 19:30:08 by kjurkows         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ LIBFT_DIR	=	libft
 LIBFT_MAKE	=	$(LIBFT_DIR)/Makefile
 LIBFT_H		=	$(LIBFT_DIR)/libft.h
 LIBFT		=	$(LIBFT_DIR)/libft.a
+LIBFT_URL	=	https://github.com/Kjur0/42-libft.git
 
 SRCS_DIR	=	srcs
 SRCS		=	ft_printf.c \
@@ -67,6 +68,8 @@ bonus: $(BONUS_OBJS) $(LIBFT)
 	@$(AR) $(NAME) $(BONUS_OBJS)
 	@echo "$(POSITION)$(GREEN)$(NAME) with bonus has been created successfully!$(RESET)"
 
+libft: $(LIBFT)
+
 $(LIBFT): $(LIBFT_MAKE)
 	@echo -n "$(BLUE)Compiling libft...$(RESET) "
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
@@ -76,7 +79,7 @@ $(LIBFT_H): $(LIBFT_MAKE)
 
 $(LIBFT_MAKE):
 	@echo -n "$(BLUE)Initializing and updating libft submodule...$(RESET) "
-	@git submodule update --init --recursive > /dev/null 2> /dev/null
+	@git submodule update --init --recursive $(LIBFT_DIR) > /dev/null 2>&1 || git clone $(LIBFT_URL) $(LIBFT_DIR) > /dev/null 2>&1
 	@echo "$(POSITION)$(GREEN)Libft submodule is ready!$(RESET)"
 
 $(OBJS_DIR)/bonus/%.o: $(SRCS_DIR)/bonus/%.c $(LIBFT_H) | $(OBJS_DIR)
@@ -118,4 +121,4 @@ fclean: clean
 re: fclean all
 	@echo "$(GREEN)Rebuild complete!$(RESET)"
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus libft
