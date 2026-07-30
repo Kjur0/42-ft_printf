@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 15:28:40 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/29 19:38:41 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:30:40 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	ft_print_hex(size_t ptr, t_list **lst)
  * @internal handler for `%p`
  * @param p		pointer which address to print
  * @param lst	pointer to linked list
- * @param f	flags for printing
+ * @param f		flags for printing
  */
 void	ft_printf_p(void *p, t_list **lst, t_printf_flags *f)
 {

@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 14:53:40 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/29 19:38:38 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:30:36 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
  * @internal handler for `%s`
  * @param s		string to print
  * @param lst	pointer to linked list
- * @param flags flags for printing
+ * @param flags	flags for printing
  */
 void	ft_printf_s(char *s, t_list **lst, t_printf_flags *flags)
 {

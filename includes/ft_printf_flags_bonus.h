@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 20:40:29 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/22 17:00:32 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:29:52 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,21 @@
 
 # include <ft_printf.h>
 
+# include <stdbool.h>
+
 /** @brief struct for storing flags
  *
  * @internal
 */
 typedef struct s_printf_flags
 {
-	int	align_left; ///< whether to align left (`-`)
-	int	precision; ///< what precision is set (`.<width>`)
-	int	pad_zero; ///< whether to pad with zeros (`0`)
-	int	min_width; ///< minimum width (`<width>`)
-	int	alternate; ///< whether to use alternate version (`#`)
-	int	space; ///< whether to leave space for sign (` `)
-	int	sign; ///< whether to always print sign (`+`)
+	bool	align_left; ///< whether to align left (`-`)
+	int		precision; ///< what precision is set (`.<width>`)
+	bool	pad_zero; ///< whether to pad with zeros (`0`)
+	int		min_width; ///< minimum width (`<width>`)
+	bool	alternate; ///< whether to use alternate version (`#`)
+	bool	space; ///< whether to leave space for sign (` `)
+	bool	sign; ///< whether to always print sign (`+`)
 }	t_printf_flags;
 
 /** @brief create new ::t_printf_flags with default values

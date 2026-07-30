@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 21:09:42 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/29 19:42:32 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:37:26 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_printf_c(char c, t_list **lst, t_printf_flags *flags);
  * @internal handler for `%s`
  * @param s		string to print
  * @param lst	pointer to linked list
- * @param flags flags for printing
+ * @param flags	flags for printing
  */
 void	ft_printf_s(char *s, t_list **lst, t_printf_flags *flags);
 /** @brief print pointer
@@ -132,10 +132,11 @@ void	ft_printf_u(unsigned int u, t_list **lst, t_printf_flags *flags);
  * @internal handler for `%x` & `%X`
  * @param x		unsigned integer to print
  * @param lst	pointer to linked list
- * @param flags flags for printing
- * @param c	whether to use uppercase
+ * @param flags	flags for printing
+ * @param uc	whether to use uppercase
  */
-void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags, int c);
+void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags,
+			bool uc);
 
 /** @brief basic container for a character
  *

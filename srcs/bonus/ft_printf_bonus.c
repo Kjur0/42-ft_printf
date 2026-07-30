@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/29 19:46:05 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:35:12 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ static int	ft_putfmt(const char **fmt, va_list args, t_list **lst,
 	else
 	{
 		free(flags);
-		return (1);
+		return (EXIT_FAILURE);
 	}
 	free(flags);
 	(*fmt)++;
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 /** @brief handle printf formatters and flags
@@ -102,20 +102,20 @@ static int	ft_printf_format(const char **fmt, va_list args, t_list **lst)
 	while (*++(*fmt))
 	{
 		if (**fmt == '-')
-			flags->align_left = 1;
+			flags->align_left = true;
 		else if (**fmt == '0')
-			flags->pad_zero = 1;
+			flags->pad_zero = true;
 		else if (**fmt == '.')
 		{
 			(*fmt)++;
 			flags->precision = ft_printf_width(fmt);
 		}
 		else if (**fmt == '#')
-			flags->alternate = 1;
+			flags->alternate = true;
 		else if (**fmt == ' ')
-			flags->space = 1;
+			flags->space = true;
 		else if (**fmt == '+')
-			flags->sign = 1;
+			flags->sign = true;
 		else if (ft_isdigit(**fmt))
 			flags->min_width = ft_printf_width(fmt);
 		else
@@ -188,7 +188,7 @@ int	ft_printf(const char *str, ...)
 	va_list	args;
 	t_list	*lst;
 
-	lst = 0;
+	lst = NULL;
 	va_start(args, str);
 	while (*str)
 	{

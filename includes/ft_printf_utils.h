@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:50:48 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/01 20:57:23 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:28:51 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FT_PRINTF_UTILS_H
 
 # include <libft.h>
+
+# include <stdbool.h>
 
 /** @brief print character onto screen
  *
@@ -69,6 +71,6 @@ int	ft_putunsigned(unsigned int nbr);
  * @param uppercase	whether to print it in uppercase
  * @return number of characters printed
  */
-int	ft_puthex(unsigned int nbr, int uppercase);
+int	ft_puthex(unsigned int nbr, bool uppercase);
 
 #endif

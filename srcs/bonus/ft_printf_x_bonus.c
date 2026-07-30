@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 18:44:58 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/29 19:42:14 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:37:51 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,11 @@ static void	ft_print_hex(unsigned int nbr, t_list **lst, int big)
  * @internal handler for `%x` & `%X`
  * @param x		unsigned integer to print
  * @param lst	pointer to linked list
- * @param flags flags for printing
- * @param c	whether to use uppercase
+ * @param flags	flags for printing
+ * @param uc	whether to use uppercase
  */
-void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags, int c)
+void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags,
+			bool uc)
 {
 	const int	len = ft_hex_len(x);
 
@@ -90,14 +91,14 @@ void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags, int c)
 		flags->min_width = 0;
 	while (!flags->align_left && flags->min_width--)
 		ft_lst_char(lst, ' ');
-	if (flags->alternate && x != 0 && !c)
+	if (flags->alternate && x != 0 && !uc)
 		ft_lst_str(lst, "0x");
-	if (flags->alternate && x != 0 && c)
+	if (flags->alternate && x != 0 && uc)
 		ft_lst_str(lst, "0X");
 	while (flags->precision-- > len)
 		ft_lst_char(lst, '0');
 	if (x != 0)
-		ft_print_hex(x, lst, c);
+		ft_print_hex(x, lst, uc);
 	while (flags->align_left && flags->min_width--)
 		ft_lst_char(lst, ' ');
 }
