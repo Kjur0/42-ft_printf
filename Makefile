@@ -6,7 +6,7 @@
 #    By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/30 17:19:04 by kjurkows          #+#    #+#              #
-#    Updated: 2026/07/29 19:30:08 by kjurkows         ###   ########.fr        #
+#    Updated: 2026/08/11 17:56:15 by kjurkows         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT_H		=	$(LIBFT_DIR)/libft.h
 LIBFT		=	$(LIBFT_DIR)/libft.a
 LIBFT_URL	=	https://github.com/Kjur0/42-libft.git
 
-SRCS_DIR	=	srcs
+SRCS_DIR	=	src
 SRCS		=	ft_printf.c \
 				ft_printf_utils1.c \
 				ft_printf_utils2.c
@@ -33,12 +33,12 @@ BONUS_SRCS	=	ft_printf_bonus.c \
 				ft_printf_u_bonus.c \
 				ft_printf_x_bonus.c
 
-OBJS_DIR	=	objs
+OBJS_DIR	=	build
 OBJS		=	$(SRCS:%.c=$(OBJS_DIR)/%.o)
 BONUS_OBJS	=	$(BONUS_SRCS:%.c=$(OBJS_DIR)/bonus/%.o)
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -I$(LIBFT_DIR) -Iincludes -fPIC
+CFLAGS		=	-Wall -Wextra -Werror -I$(LIBFT_DIR) -Iinclude -fPIC
 AR			=	ar rcs
 RM			=	rm -rf
 
@@ -56,24 +56,24 @@ MAKEFLAGS += --no-print-directory
 all: $(NAME)
 	@echo "$(GREEN)$(NAME) is ready to use.$(RESET)"
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(LIBFT) $(OBJS)
 	@echo -n "$(BLUE)Creating $(NAME)...$(RESET) "
 	@cp $(LIBFT) $(NAME)
 	@$(AR) $(NAME) $(OBJS)
 	@echo "$(POSITION)$(GREEN)$(NAME) has been created successfully!$(RESET)"
 
-bonus: $(BONUS_OBJS) $(LIBFT)
+bonus: $(LIBFT) $(BONUS_OBJS)
 	@echo -n "$(BLUE)Creating $(NAME) with bonus...$(RESET) "
 	@cp $(LIBFT) $(NAME)
 	@$(AR) $(NAME) $(BONUS_OBJS)
 	@echo "$(POSITION)$(GREEN)$(NAME) with bonus has been created successfully!$(RESET)"
 
-libft: $(LIBFT)
-
 $(LIBFT): $(LIBFT_MAKE)
 	@echo -n "$(BLUE)Compiling libft...$(RESET) "
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
 	@echo "$(POSITION)$(GREEN)Libft has been compiled successfully!$(RESET)"
+
+libft: $(LIBFT)
 
 $(LIBFT_H): $(LIBFT_MAKE)
 

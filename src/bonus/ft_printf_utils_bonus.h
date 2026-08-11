@@ -6,15 +6,16 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 21:09:42 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/30 12:37:26 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/08/11 17:51:35 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_UTILS_BONUS_H
 # define FT_PRINTF_UTILS_BONUS_H
 
-# include <ft_printf.h>
-# include <ft_printf_flags_bonus.h>
+# include "ft_printf_flags_bonus.h"
+
+# include <libft.h>
 
 # include <stdlib.h>
 

@@ -6,11 +6,11 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 20:48:14 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/30 12:31:00 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/08/11 17:56:58 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf_flags_bonus.h>
+#include "ft_printf_flags_bonus.h"
 
 #include <stdlib.h>
 

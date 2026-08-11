@@ -6,14 +6,12 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 20:40:29 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/30 12:29:52 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/08/11 17:51:16 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_FLAGS_BONUS_H
 # define FT_PRINTF_FLAGS_BONUS_H
-
-# include <ft_printf.h>
 
 # include <stdbool.h>
 

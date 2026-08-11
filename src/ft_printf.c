@@ -6,12 +6,12 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/07/29 19:46:12 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/08/11 17:50:39 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
-#include <ft_printf_utils.h>
+#include "ft_printf_utils.h"
 
 #include <stdarg.h>
 
