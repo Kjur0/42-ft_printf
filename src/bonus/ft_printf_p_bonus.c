@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 15:28:40 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/08/11 17:56:51 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/08/12 20:56:47 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_printf_p(void *p, t_list **lst, t_printf_flags *f)
 {
 	const int	len = ft_hex_len((size_t)p);
 
-	if (!f->align_left && f->pad_zero && f->precision == -1)
+	if (!f->align_left && f->pad_zero && f->precision < 0)
 		f->precision = f->min_width - 2;
 	if (len > f->precision)
 		f->precision = len + (p == 0) * 3;

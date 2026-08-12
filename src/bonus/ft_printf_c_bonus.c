@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 13:36:29 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/08/11 17:56:51 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/08/12 21:11:15 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@
  * @internal handler for `%c`
  * @param c		character to print
  * @param lst	pointer to linked list
- * @param flags	flags for printing
+ * @param f		flags for printing
  */
-void	ft_printf_c(char c, t_list **lst, t_printf_flags *flags)
+void	ft_printf_c(char c, t_list **lst, t_printf_flags *f)
 {
-	if (flags->align_left)
+	if (f->align_left)
 		ft_lst_char(lst, c);
-	while (flags->min_width-- > 1)
+	while (f->min_width-- > 1)
 		ft_lst_char(lst, ' ');
-	if (!flags->align_left)
+	if (!f->align_left)
 		ft_lst_char(lst, c);
 }

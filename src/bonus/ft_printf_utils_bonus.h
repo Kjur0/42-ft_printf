@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 21:09:42 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/08/11 17:51:35 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/08/12 21:13:11 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@
  * @internal handler for `%c`
  * @param c		character to print
  * @param lst	pointer to linked list
- * @param flags	flags for printing
+ * @param f		flags for printing
  */
-void	ft_printf_c(char c, t_list **lst, t_printf_flags *flags);
+void	ft_printf_c(char c, t_list **lst, t_printf_flags *f);
 /** @brief print string
  *
  * add string to linked list handling all necessary flags
@@ -51,9 +51,9 @@ void	ft_printf_c(char c, t_list **lst, t_printf_flags *flags);
  * @internal handler for `%s`
  * @param s		string to print
  * @param lst	pointer to linked list
- * @param flags	flags for printing
+ * @param f		flags for printing
  */
-void	ft_printf_s(char *s, t_list **lst, t_printf_flags *flags);
+void	ft_printf_s(char *s, t_list **lst, t_printf_flags *f);
 /** @brief print pointer
  *
  * add pointer's address to linked list handling all necessary flags
@@ -72,9 +72,9 @@ void	ft_printf_s(char *s, t_list **lst, t_printf_flags *flags);
  * @internal handler for `%p`
  * @param p		pointer which address to print
  * @param lst	pointer to linked list
- * @param flags	flags for printing
+ * @param f		flags for printing
  */
-void	ft_printf_p(void *p, t_list **lst, t_printf_flags *flags);
+void	ft_printf_p(void *p, t_list **lst, t_printf_flags *f);
 /** @brief print digit/integer
  *
  * add integer's digits to linked list handling all necessary flags
@@ -93,9 +93,9 @@ void	ft_printf_p(void *p, t_list **lst, t_printf_flags *flags);
  * @internal handler for `%d` & `%i`
  * @param i		integer to print
  * @param lst	pointer to linked list
- * @param flags	flags for printing
+ * @param f		flags for printing
  */
-void	ft_printf_di(int i, t_list **lst, t_printf_flags *flags);
+void	ft_printf_di(int i, t_list **lst, t_printf_flags *f);
 /** @brief print unsigned integer
  *
  * add unsigned integer's digits to linked list handling all necessary flags
@@ -112,9 +112,9 @@ void	ft_printf_di(int i, t_list **lst, t_printf_flags *flags);
  * @internal handler for `%u`
  * @param u		unsigned integer to print
  * @param lst	pointer to linked list
- * @param flags	flags for printing
+ * @param f		flags for printing
  */
-void	ft_printf_u(unsigned int u, t_list **lst, t_printf_flags *flags);
+void	ft_printf_u(unsigned int u, t_list **lst, t_printf_flags *f);
 /** @brief print hexadecimal
  *
  * add hexadecimal representation of unsigned integer to linked list handling
@@ -133,11 +133,10 @@ void	ft_printf_u(unsigned int u, t_list **lst, t_printf_flags *flags);
  * @internal handler for `%x` & `%X`
  * @param x		unsigned integer to print
  * @param lst	pointer to linked list
- * @param flags	flags for printing
+ * @param f		flags for printing
  * @param uc	whether to use uppercase
  */
-void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags,
-			bool uc);
+void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *f, bool uc);
 
 /** @brief basic container for a character
  *

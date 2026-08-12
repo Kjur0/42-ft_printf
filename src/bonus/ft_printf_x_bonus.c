@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 18:44:58 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/08/11 17:56:51 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/08/12 21:12:18 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,32 +73,31 @@ static void	ft_print_hex(unsigned int nbr, t_list **lst, int big)
  * @internal handler for `%x` & `%X`
  * @param x		unsigned integer to print
  * @param lst	pointer to linked list
- * @param flags	flags for printing
+ * @param f		flags for printing
  * @param uc	whether to use uppercase
  */
-void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *flags,
-			bool uc)
+void	ft_printf_x(unsigned int x, t_list **lst, t_printf_flags *f, bool uc)
 {
 	const int	len = ft_hex_len(x);
 
-	if (!flags->align_left && flags->pad_zero && flags->precision == -1)
-		flags->precision = flags->min_width - (flags->alternate && x != 0) * 2;
-	if (len > flags->precision)
-		flags->precision = len + (x == 0);
-	if (flags->precision + 2 * (flags->alternate && x != 0) < flags->min_width)
-		flags->min_width -= flags->precision + 2 * (flags->alternate && x != 0);
+	if (!f->align_left && f->pad_zero && f->precision < 0)
+		f->precision = f->min_width - (f->alternate && x != 0) * 2;
+	if (len > f->precision)
+		f->precision = len + (x == 0);
+	if (f->precision + 2 * (f->alternate && x != 0) < f->min_width)
+		f->min_width -= f->precision + 2 * (f->alternate && x != 0);
 	else
-		flags->min_width = 0;
-	while (!flags->align_left && flags->min_width--)
+		f->min_width = 0;
+	while (!f->align_left && f->min_width--)
 		ft_lst_char(lst, ' ');
-	if (flags->alternate && x != 0 && !uc)
+	if (f->alternate && x != 0 && !uc)
 		ft_lst_str(lst, "0x");
-	if (flags->alternate && x != 0 && uc)
+	if (f->alternate && x != 0 && uc)
 		ft_lst_str(lst, "0X");
-	while (flags->precision-- > len)
+	while (f->precision-- > len)
 		ft_lst_char(lst, '0');
 	if (x != 0)
 		ft_print_hex(x, lst, uc);
-	while (flags->align_left && flags->min_width--)
+	while (f->align_left && f->min_width--)
 		ft_lst_char(lst, ' ');
 }

@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 20:48:14 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/08/11 17:56:58 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/08/12 20:55:36 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_printf_flags	*new_printf_flags(void)
 	flags = malloc(sizeof(t_printf_flags));
 	flags->align_left = false;
 	flags->alternate = false;
-	flags->min_width = -1;
+	flags->min_width = -2;
 	flags->pad_zero = false;
-	flags->precision = -1;
+	flags->precision = -2;
 	flags->sign = false;
 	flags->space = false;
 	return (flags);

@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 14:53:40 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/08/11 17:56:51 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/08/12 21:11:37 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,28 @@
  * @internal handler for `%s`
  * @param s		string to print
  * @param lst	pointer to linked list
- * @param flags	flags for printing
+ * @param f		flags for printing
  */
-void	ft_printf_s(char *s, t_list **lst, t_printf_flags *flags)
+void	ft_printf_s(char *s, t_list **lst, t_printf_flags *f)
 {
 	const int	len = ft_strlen(s);
 
 	if (!s)
 	{
-		if (flags->precision > 5 || flags->precision == -1)
-			ft_printf_s("(null)", lst, flags);
+		if (f->precision > 5 || f->precision < 0)
+			ft_printf_s("(null)", lst, f);
 		return ;
 	}
-	if (flags->precision == -1)
-		flags->precision = len;
-	if (flags->min_width > flags->precision)
-		flags->min_width -= flags->precision;
+	if (f->precision < 0)
+		f->precision = len;
+	if (f->min_width > f->precision)
+		f->min_width -= f->precision;
 	else
-		flags->min_width = 0;
-	while (!flags->align_left && flags->min_width--)
+		f->min_width = 0;
+	while (!f->align_left && f->min_width--)
 		ft_lst_char(lst, ' ');
-	while (*s && flags->precision-- > 0)
+	while (*s && f->precision-- > 0)
 		ft_lst_char(lst, *s++);
-	while (flags->align_left && flags->min_width--)
+	while (f->align_left && f->min_width--)
 		ft_lst_char(lst, ' ');
 }
