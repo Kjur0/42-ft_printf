@@ -6,7 +6,7 @@
 #    By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/30 17:19:04 by kjurkows          #+#    #+#              #
-#    Updated: 2026/08/11 17:56:15 by kjurkows         ###   ########.fr        #
+#    Updated: 2026/08/22 22:20:14 by kjurkows         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ BONUS_SRCS	=	ft_printf_bonus.c \
 				ft_printf_p_bonus.c \
 				ft_printf_di_bonus.c \
 				ft_printf_u_bonus.c \
-				ft_printf_x_bonus.c
+				ft_printf_x_bonus.c \
+				ft_eprintf_bonus.c
 
 OBJS_DIR	=	build
 OBJS		=	$(SRCS:%.c=$(OBJS_DIR)/%.o)
