@@ -6,7 +6,7 @@
 /*   By: kjurkows <kjurkows@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:25:38 by kjurkows          #+#    #+#             */
-/*   Updated: 2026/08/22 22:20:01 by kjurkows         ###   ########.fr       */
+/*   Updated: 2026/08/22 22:24:44 by kjurkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ int	ft_eprintf(const char *str, ...)
 		{
 			if (ft_eprintf_format(&str, args, &lst))
 			{
-				ft_lst_print(lst);
+				ft_lst_eprint(lst);
 				va_end(args);
 				return (-1);
 			}
@@ -205,5 +205,5 @@ int	ft_eprintf(const char *str, ...)
 		ft_lst_char(&lst, *str++);
 	}
 	va_end(args);
-	return (ft_lst_print(lst));
+	return (ft_lst_eprint(lst));
 }
